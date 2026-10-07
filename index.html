@@ -1,0 +1,54 @@
+<div id="warning"><img src="libs/warnings/info.svg">Jackson AI doesn't work best on mobile. Try desktop to unlock all features.</div>
+<script>
+  const COOKIE_MAX_AGE = 40 * 60; // keep in sync with sender
+
+  function getCookie(name) {
+    const match = document.cookie.match(
+      new RegExp('(?:^|; )' + name + '=([^;]*)')
+    );
+    return match ? decodeURIComponent(match[1]) : null;
+  }
+
+  function setCookie(name, value, maxAge = COOKIE_MAX_AGE) {
+    document.cookie =
+      name + '=' + encodeURIComponent(value) +
+      '; domain=.jackson.ai' +
+      '; path=/' +
+      '; max-age=' + maxAge +
+      '; SameSite=Lax';
+  }
+
+  function deleteCookie(name) {
+    document.cookie =
+      name + '=; domain=.jackson.ai; path=/; max-age=0';
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    const prompt = getCookie('jackson_prompt');
+    const token  = getCookie('game');
+    const box    = document.getElementById('prompt');
+
+    if (prompt && box) box.value = prompt;
+
+    if (token) {
+      console.log('🍪 Game token registered:', token);
+
+      // Refresh both cookies → 40 min idle timeout restarts
+      if (prompt) setCookie('jackson_prompt', prompt);
+      setCookie('game', token);
+    }
+
+    // Optional: clear the prompt cookie once the studio loads it
+    // deleteCookie('jackson_prompt');
+  });
+
+  // Optional: keep the game cookie alive while typing
+  document.addEventListener('input', (e) => {
+    if (e.target.id === 'prompt') {
+      const val = e.target.value;
+      if (val) setCookie('jackson_prompt', val);
+      const tok = getCookie('game');
+      if (tok) setCookie('game', tok);
+    }
+  });
+</script>
