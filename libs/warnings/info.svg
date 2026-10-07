@@ -1,0 +1,11 @@
+<svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Info">
+  <circle cx="60" cy="60" r="58" fill="none" stroke="#000" stroke-width="3"/>
+  <text x="60" y="60"
+        text-anchor="middle"
+        dominant-baseline="central"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-size="72"
+        font-style="italic"
+        font-weight="700"
+        fill="#000">i</text>
+</svg>
