@@ -1,0 +1,1 @@
+onclick.window.location.href = "https://studio.jackson.ai/{your.prompt}"
